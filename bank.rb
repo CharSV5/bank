@@ -1,33 +1,41 @@
 class BankAccount
-  attr_reader :date, :balance, :transactions, :history
+  attr_reader :date, :balance, :transaction, :history
   def initialize(balance = 0)
     @balance = balance
-    @transactions = {date: date, credit: '', debit: '', balance: balance}
+    @transaction = { date: date, credit: '', debit: '', balance: balance }
     @history = []
   end
 
   def deposit(date, amount)
     @balance += amount
-    @transactions = {date: date, credit: amount, debit: '', balance: @balance}
+    @transaction = { date: date, credit: amount, debit: '', balance: @balance }
   end
 
   def withdraw(date, amount)
     @balance -= amount
-    @transactions = {date: date, credit: '', debit: amount, balance: @balance}
+    @transaction = { date: date, credit: '', debit: amount, balance: @balance }
   end
-
 
   def print_statement_header
-    p 'date || credit || debit || balance'
+    puts 'date || credit || debit || balance'
   end
+
   def print_statement
-    p "#{@transactions[:date]} || #{@transactions[:credit]} ||
-      #{@transactions[:debit]} || #{@transactions[:balance]}"
+    "#{@transaction[:date]} || #{@transaction[:credit]} || "\
+    "#{@transaction[:debit]} || #{@transaction[:balance]}"
+  end
+
+  def recall_history
+    deposit('10/01/2012', 1000)
+    @history.unshift(print_statement)
+    deposit('13/01/2012', 2000)
+    @history.unshift(print_statement)
+    withdraw('14/01/2012', 500)
+    @history.unshift(print_statement)
+    puts @history.sort { |a, b| b <=> a }
   end
 end
+
 account = BankAccount.new
-account.deposit('10/01/2012', 1000)
-account.print_statement
-account.history.push(account.print_statement)
-account.deposit('13/01/2012', 2000)
-account.history.push(account.print_statement)
+account.print_statement_header
+account.recall_history
