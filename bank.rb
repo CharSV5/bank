@@ -25,6 +25,7 @@ class BankAccount
     "#{@transaction[:debit]} || #{@transaction[:balance]}"
   end
 
+  # this method mimics actions by the user
   def recall_history
     deposit('10/01/2012', 1000)
     @history.unshift(print_statement)

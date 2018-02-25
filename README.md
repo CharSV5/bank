@@ -1,4 +1,4 @@
-#README.md
+# Introduction
 
 For this workshop task at Makers, we were to construct a bank account programme consisting of one class to print out a predefined bank statement that looked like this:
 
