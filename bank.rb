@@ -1,8 +1,9 @@
 class BankAccount
-  attr_reader :date, :balance, :transactions,
+  attr_reader :date, :balance, :transactions, :history
   def initialize(balance = 0)
     @balance = balance
     @transactions = {date: date, credit: '', debit: '', balance: balance}
+    @history = []
   end
 
   def deposit(date, amount)
@@ -25,3 +26,8 @@ class BankAccount
   end
 end
 account = BankAccount.new
+account.deposit('10/01/2012', 1000)
+account.print_statement
+account.history.push(account.print_statement)
+account.deposit('13/01/2012', 2000)
+account.history.push(account.print_statement)
