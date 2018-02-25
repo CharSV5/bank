@@ -1,33 +1,23 @@
 class BankAccount
-  attr_reader :date, :balance, :transactions :history
+  attr_reader :date, :balance, :transactions,
   def initialize(balance = 0)
     @balance = balance
-    @transactions = {date: date, credit: "", debit: "", balance: balance}
-    @history = []
+    @transactions = {date: date, credit: '', debit: '', balance: balance}
   end
 
-  def deposits(date, amount)
-    @transactions[:date] = date
+  def deposit(date, amount)
     @balance += amount
-    @transactions[:balance] = @balance
-    @transactions[:debit] = nil
-    @transactions[:credit] = amount
+    @transactions = {date: date, credit: amount, debit: '', balance: @balance}
   end
 
-  def withdrawals(date, amount)
-    @transactions[:date] = date
+  def withdraw(date, amount)
     @balance -= amount
-    @transactions[:balance] = @balance
-    @transactions[:credit] = nil
-    @transactions[:debit] = amount
+    @transactions = {date: date, credit: '', debit: amount, balance: @balance}
   end
 
-  def date
-    @date
-  end
 
   def print_statement_header
-    p "date || credit || debit || balance"
+    p 'date || credit || debit || balance'
   end
   def print_statement
     p "#{@transactions[:date]} || #{@transactions[:credit]} ||
